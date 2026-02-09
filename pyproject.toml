@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "payelink-agent-identity-sdk"
+version = "0.1.0"
+description = "W3C DID Core v1.0 compliant SDK and CLI for generating did:key DIDs for agent identity"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "PayeLink", email = "info@payelink.com"}
+]
+keywords = ["DID", "decentralized-identity", "w3c", "did-key", "agents", "payelink"]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "cryptography>=41.0.0",     # Ed25519 key generation
+    "pydantic>=2.0.0",          # Data validation
+    "click>=8.0.0",             # CLI framework
+    "base58>=2.1.0",            # Base58 encoding for multibase
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+payelink-agent-identity = "payelink_agent_identity.cli.commands:cli"
+
+[project.urls]
+Homepage = "https://github.com/payelink/payelink-agent-identity-sdk"
+Documentation = "https://github.com/payelink/payelink-agent-identity-sdk#readme"
+Repository = "https://github.com/payelink/payelink-agent-identity-sdk"
+Issues = "https://github.com/payelink/payelink-agent-identity-sdk/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["payelink_agent_identity*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
